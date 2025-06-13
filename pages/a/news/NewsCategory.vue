@@ -67,7 +67,7 @@ module.exports = {
                 xAxis: {
                     name: '时间',
                     type: 'category',
-                    data: [1, 1]
+                    data: []
                 },
                 yAxis: {
                     name: '个数',
@@ -78,7 +78,7 @@ module.exports = {
                     {
                         name: '个数',
                         type: 'bar',
-                        data: [1, 1]
+                        data: []
                     }
                 ]
             }

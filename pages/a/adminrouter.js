@@ -5,7 +5,7 @@ window.myrouter = {
         // 当访问根路径 `/` 时，加载 'stu/list.vue' 组件
         //{ path: '/', component: httpVueLoader('stu/list.vue') },
 
-        { path: '/', component: httpVueLoader('news/AllNews.vue') },
+        { path: '/', component: httpVueLoader('news/NewsLife.vue') },
 
         { path: '/stuMng/stuList', component: httpVueLoader('stu/list.vue') },
         { path: '/stuMng/createStu', component: httpVueLoader('stu/create.vue') },

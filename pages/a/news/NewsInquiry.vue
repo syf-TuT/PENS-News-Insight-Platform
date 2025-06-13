@@ -78,8 +78,10 @@
 
                 <!-- 按钮 -->
                 <div class="action-buttons">
-                    <el-button type="primary" icon="el-icon-search" @click="searchData">查询</el-button>
-                    <el-button icon="el-icon-refresh" @click="resetForm">重置</el-button>
+                    <el-button type="primary" icon="el-icon-search" @click="searchData"
+                        style="font-size: 18px; padding: 9px 18px;">查询</el-button>
+                    <el-button icon="el-icon-refresh" @click="resetForm"
+                        style="font-size: 18px; padding: 9px 18px;">重置</el-button>
                 </div>
             </el-form>
         </div>
@@ -139,7 +141,7 @@ module.exports = {
         };
     },
     mounted() {
-        this.initMockRecords();
+        //this.initMockRecords();
     },
     methods: {
         initMockRecords() {
