@@ -15,11 +15,11 @@
                 <div class="filter-row">
                     <div class="filter-group">
                         <div class="filter-label">爆款新闻类别</div>
-                        <el-input v-model="category" disabled style="width: 300px;" />
+                        <el-input v-model="category" class="input-style" disabled style="width: 300px;" />
                     </div>
                     <div class="filter-group">
                         <div class="filter-label">爆款新闻主题</div>
-                        <el-input v-model="topic" disabled style="width: 300px;" />
+                        <el-input v-model="topic" class="input-style" disabled style="width: 300px;" />
                     </div>
                 </div>
             </el-form>
@@ -71,6 +71,15 @@ module.exports = {
 </script>
 
 <style scoped>
+.input-style .el-input__inner {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
 .hot-news-container {
     max-width: 1400px;
     margin: 0 auto;

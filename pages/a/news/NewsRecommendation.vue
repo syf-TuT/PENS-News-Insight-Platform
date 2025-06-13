@@ -49,7 +49,7 @@
 </template>
 
 <script>
-const hotNewsApi = require('@/api/hotNewsApi');
+
 
 module.exports = {
     name: "HotNewsByUser",

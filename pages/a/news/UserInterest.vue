@@ -84,10 +84,10 @@ module.exports = {
             //     this.chartData = mockResponse  // 直接赋值
             // }, 200)
             newsApi.getUserInterestData(userId).then(response => {
-                const res = response.data
+                const res = response
 
                 // 更新用户ID信息就行，名字不要了
-                this.userInfo = { id: userId }
+                //this.userInfo = { id: userId }
 
                 // 直接保存 chartData
                 this.chartData = res

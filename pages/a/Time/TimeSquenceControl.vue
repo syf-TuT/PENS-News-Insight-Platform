@@ -43,20 +43,20 @@ module.exports = {
         addTime() {
             timeSquenceApi.addTime().then(res => {
                 if (res.status) {
-                    Message.success("时序已成功增加一天！");
+                    this.$message.success("时序已成功增加一天！");
                     this.getCurrentTime();
                 } else {
-                    Message.error("操作失败！");
+                    this.$message.error("操作失败！");
                 }
             });
         },
         resetTime() {
             timeSquenceApi.resetTime().then(res => {
                 if (res.status) {
-                    Message.success("时序已重置！");
+                    this.$message.success("时序已重置！");
                     this.getCurrentTime();
                 } else {
-                    Message.error("重置失败！");
+                    this.$message.error("重置失败！");
                 }
             });
         }

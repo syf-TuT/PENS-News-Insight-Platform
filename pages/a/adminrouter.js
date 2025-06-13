@@ -30,7 +30,7 @@ window.myrouter = {
         //},
         {
             title: '新闻', path: '/News', index: 'News', icon: 'el-icon-s-order', children: [
-                { title: '所有新闻', path: '/AllNews', index: 'AllNews', children: [], role: 1, },
+                //{ title: '所有新闻', path: '/AllNews', index: 'AllNews', children: [], role: 1, },
                 { title: '新闻生命周期', path: '/NewsLife', index: 'NewsLife', children: [], role: 1, },
                 { title: '新闻类别统计', path: '/NewsCategory', index: 'NewsCategory', children: [], role: 1, },
                 { title: '用户兴趣', path: '/UserInterest', index: 'UserInterest', children: [], role: 1, },

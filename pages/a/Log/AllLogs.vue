@@ -36,6 +36,9 @@ module.exports = {
             logs: [],
         };
     },
+    mounted() {
+        this.fetchLogs();
+    },
     methods: {
         fetchLogs() {
             logApi.getAllLogs().then((res) => {

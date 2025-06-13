@@ -106,9 +106,9 @@ module.exports = {
             try {
                 const response = await newsApi.getCategoryLifeCycleData(category);
 
-                const result = await response.json()
-                if (result.lifeCircle) {
-                    this.rawLifeCycleData = result.lifeCircle.map(t => new Date(t))
+                //const result = await response.json()
+                if (response.lifeCircle) {
+                    this.rawLifeCycleData = response.lifeCircle.map(t => new Date(t))
                     this.updateChart()
                 } else {
                     this.$message.error('未获取到新闻类别生命周期数据')
