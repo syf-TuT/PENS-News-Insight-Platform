@@ -13,7 +13,11 @@ window.myrouter = {
         { path: '/News/NewsLife', component: httpVueLoader('news/NewsLife.vue') },
         { path: '/News/NewsCategory', component: httpVueLoader('news/NewsCategory.vue') },
         { path: '/News/UserInterest', component: httpVueLoader('news/UserInterest.vue') },
-
+        { path: '/News/NewsInquiry', component: httpVueLoader('news/NewsInquiry.vue') },
+        { path: '/News/HotNews', component: httpVueLoader('news/HotNews.vue') },
+        { path: '/News/NewsRecommendation', component: httpVueLoader('news/NewsRecommendation.vue') },
+        { path: '/Log/AllLogs', component: httpVueLoader('Log/AllLogs.vue') },
+        { path: '/Time/TimeSquenceControl', component: httpVueLoader('Time/TimeSquenceControl.vue') },
     ],
 
     menuList: [
@@ -30,8 +34,22 @@ window.myrouter = {
                 { title: '新闻生命周期', path: '/NewsLife', index: 'NewsLife', children: [], role: 1, },
                 { title: '新闻类别统计', path: '/NewsCategory', index: 'NewsCategory', children: [], role: 1, },
                 { title: '用户兴趣', path: '/UserInterest', index: 'UserInterest', children: [], role: 1, },
+                { title: '新闻查询', path: '/NewsInquiry', index: 'NewsInquiry', children: [], role: 1, },
+                { title: '爆款新闻', path: '/HotNews', index: 'HotNews', children: [], role: 1, },
+                { title: '用户新闻推荐', path: '/NewsRecommendation', index: 'NewsRecommendation', children: [], role: 1, },
             ], role: 1,
         },
+        {
+            title: '日志', path: '/Log', index: 'Log', icon: 'el-icon-s-order', children: [
+                { title: '系统日志', path: '/AllLogs', index: 'AllLogs', children: [], role: 1, },
+            ], role: 1,
+        },
+        {
+            title: '时序', path: '/Time', index: 'Time', icon: 'el-icon-s-order', children: [
+                { title: '时序控制', path: '/TimeSquenceControl', index: 'TimeSquenceControl', children: [], role: 1, },
+            ], role: 1,
+        },
+
 
     ]
 }

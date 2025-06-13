@@ -1,8 +1,8 @@
 <template>
     <div class="user-interest-app">
         <header class="app-header">
-            <h1>用户兴趣分析仪表板</h1>
-            <p>输入用户ID进行搜索，下方展示该用户点击最多的4个新闻类别及数量。</p>
+            <h1>用户兴趣分析</h1>
+            <p>输入用户ID进行搜索，下方展示该用户每日点击的新闻堆叠柱状图</p>
         </header>
 
         <section class="dashboard-container">
@@ -15,24 +15,9 @@
                 </el-input>
             </div>
 
-            <div v-if="userInfo" class="user-info">
-                <div class="avatar">{{ userInitial }}</div>
-                <div class="user-details">
-                    <div class="user-name">{{ userInfo.name }}</div>
-                    <div class="user-stats">
-                        <div class="stat-item">
-                            <div class="stat-value">{{ userInfo.clickCount }}</div>
-                            <div>总点击数</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">{{ userInfo.categoryCount }}</div>
-                            <div>新闻类别数</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="chart-container" v-if="chartData.length">
+
+            <div class="chart-container" v-if="chartData && chartData.date.length">
                 <div class="chart-title">用户兴趣柱状图</div>
                 <div ref="chart" class="chart-wrapper"></div>
             </div>
@@ -48,7 +33,7 @@ module.exports = {
         return {
             searchKeyword: '',
             userInfo: null,
-            chartData: [],
+            chartData: null,  // 改成对象，不再是数组
             chartInstance: null
         }
     },
@@ -83,60 +68,76 @@ module.exports = {
             }
         },
         fetchUserData(userId) {
-            // 这里你替换成真实的API请求
-            // 这里是模拟数据
-            const mockUserData = {
-                id: userId,
-                name: '张三',
-                clickCount: 1580,
-                categoryCount: 7,
-                interests: [
-                    { category: '体育', clicks: 520 },
-                    { category: '娱乐', clicks: 430 },
-                    { category: '科技', clicks: 370 },
-                    { category: '财经', clicks: 260 }
-                ]
-            }
 
-            // 模拟延时
-            setTimeout(() => {
-                this.userInfo = mockUserData
-                this.chartData = mockUserData.interests
-            }, 500)
+            // 这里是模拟数据
+            // 模拟后端返回格式
+            // const mockResponse = {
+            //     date: ["2024-06-10", "2024-06-11"],
+            //     data: [
+            //         { category: ["体育", "娱乐", "美食"], sum: [120, 80, 10] },
+            //         { category: ["体育", "娱乐"], sum: [140, 60] }
+            //     ]
+            // }
+
+            // setTimeout(() => {
+            //     this.userInfo = { id: userId, name: '张三' }  // 只保留id和name，其他字段不重要了
+            //     this.chartData = mockResponse  // 直接赋值
+            // }, 200)
+            newsApi.getUserInterestData(userId).then(response => {
+                const res = response.data
+
+                // 更新用户ID信息就行，名字不要了
+                this.userInfo = { id: userId }
+
+                // 直接保存 chartData
+                this.chartData = res
+            }).catch(error => {
+                console.error('获取用户兴趣数据失败:', error)
+                this.$message.error('数据请求失败，请稍后重试')
+            })
         },
         drawChart() {
             if (!this.chartInstance) {
                 this.chartInstance = echarts.init(this.$refs.chart)
             }
 
+            const { date, data } = this.chartData
+
+            // 获取所有类别，确保全量唯一
+            const categories = [...new Set(data.flatMap(item => item.category))]
+
+            // 每个类别一条 series
+            const series = categories.map(cat => {
+                return {
+                    name: cat,
+                    type: 'bar',
+                    stack: 'total',  // 堆叠柱状图
+                    emphasis: { focus: 'series' },
+                    data: date.map((_, dateIndex) => {
+                        const catIndex = data[dateIndex].category.indexOf(cat)
+                        return catIndex !== -1 ? data[dateIndex].sum[catIndex] : 0
+                    })
+                }
+            })
+
             const option = {
-                tooltip: {
-                    trigger: 'axis',
-                    axisPointer: { type: 'shadow' }
-                },
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+                legend: { top: 10 },
+                grid: { top: 60, left: '3%', right: '4%', bottom: '3%', containLabel: true },
                 xAxis: {
                     type: 'category',
-                    data: this.chartData.map(item => item.category),
-                    axisTick: { alignWithLabel: true }
+                    data: date
                 },
                 yAxis: {
                     type: 'value',
                     name: '点击次数'
                 },
-                series: [
-                    {
-                        name: '点击次数',
-                        type: 'bar',
-                        data: this.chartData.map(item => item.clicks),
-                        itemStyle: {
-                            color: '#409EFF' // Element UI 主色调
-                        }
-                    }
-                ]
+                series: series
             }
 
             this.chartInstance.setOption(option)
         }
+
     }
 }
 </script>
