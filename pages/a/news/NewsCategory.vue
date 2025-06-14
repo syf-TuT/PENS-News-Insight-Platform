@@ -77,7 +77,7 @@ module.exports = {
                 series: [
                     {
                         name: '个数',
-                        type: 'bar',
+                        type: 'line',
                         data: []
                     }
                 ]

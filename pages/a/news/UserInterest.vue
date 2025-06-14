@@ -7,8 +7,8 @@
 
         <section class="dashboard-container">
             <div class="search-section">
-                <el-input v-model="searchKeyword" placeholder="请输入用户ID" clearable @clear="handleClear"
-                    @keyup.enter.native="handleSearch" class="search-box">
+                <el-input v-model="searchKeyword" placeholder="请输入用户ID" clearable @keyup.enter.native="handleSearch"
+                    class="search-box">
                     <template #append>
                         <el-button icon="el-icon-search" @click="handleSearch" class="search-btn"></el-button>
                     </template>
@@ -31,7 +31,7 @@ const echarts = require('echarts')
 module.exports = {
     data() {
         return {
-            searchKeyword: '',
+            searchKeyword: "",
             userInfo: null,
             chartData: null,  // 改成对象，不再是数组
             chartInstance: null
@@ -57,11 +57,11 @@ module.exports = {
                 return
             }
 
-            // 模拟异步请求用户数据
+            // 异步请求用户数据
             this.fetchUserData(this.searchKeyword)
         },
         handleClear() {
-            this.userInfo = null
+            this.searchKeyword = ""
             this.chartData = []
             if (this.chartInstance) {
                 this.chartInstance.clear()
